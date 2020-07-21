@@ -19,6 +19,11 @@
             {
                 $.ajax({url: "/devices/", success: function(result){
                     disk_data.push(result.data)
+                     var rows = "";
+                        $.each(response, function () {
+                            rows += "<tr><td>" + this.model + "</td><td>" "</tr>";
+                        })
+                    $(rows).appendTo("#device-info-pide tbody");
             }})}
 
           list_disks()      
@@ -428,16 +433,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive p-0" style="height: 600px;">
-                                    <table id="devicelist" class="table table-head-fixed text-nowrap table-sm">
+                                    <table id="device-info-pide" class="table table-head-fixed text-nowrap table-sm">
                                         <thead>
                                             <tr class="headelem">
                                                 <th>DEVICE NAME</th>                             
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for disk_data in range(procinfo|length) %}
+                                            {% for data in range(disk_data|length) %}
                                             <tr class="normelem">
-                                                <td id="device-info-pide-{{ indx }}">{{ procinfo[indx]["pid"] }}</td> 
+                                                <td id="device-info-pide-{{ indx }}">{{ data.model }}</td> 
                                             </tr>
                                             {% endfor %}
                                       </tbody>
