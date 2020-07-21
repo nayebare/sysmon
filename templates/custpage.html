@@ -11,6 +11,19 @@
 	  	<link rel="stylesheet" href="{{ url_for("static", filename="css3/adminlte.css") }}" />
         <link rel="stylesheet" href="{{ url_for("static", filename="css3/toastr.css") }}" />
 	  	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+        <!--writing simple ajax script -->
+        <script type="text/javascript">
+            disk_data = [];
+      function list_disks()
+            {
+                $.ajax({url: "/devices/", success: function(result){
+                    disk_data.push(result.data)
+            }})}
+
+          list_disks()      
+        </script>
+
         <script type="text/javascript">
             async function UpdateValues() {
             while (1)
@@ -338,6 +351,8 @@
                 </div>
             </nav>
 
+            
+
             <div class="content-wrapper">
                 <div class="content-header">
                     <div class="container">
@@ -356,6 +371,7 @@
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
+
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6 col-md-3 text-center">
@@ -396,6 +412,40 @@
                                 </dl>
                             </div>
                         </div>
+
+                <!--connected devices --->
+                    <div id="sect-proc" class="card card-{{ thmcolor }}">
+                            <div class="card-header">
+                                <h5 id="devices-info-ttle" class="card-title m-0 headelem">Connected Devices </h5>
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 200px;">
+                                        <input type="text" name="table_search" class="form-control float-right normelem" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive p-0" style="height: 600px;">
+                                    <table id="devicelist" class="table table-head-fixed text-nowrap table-sm">
+                                        <thead>
+                                            <tr class="headelem">
+                                                <th>DEVICE NAME</th>                             
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for disk_data in range(procinfo|length) %}
+                                            <tr class="normelem">
+                                                <td id="device-info-pide-{{ indx }}">{{ procinfo[indx]["pid"] }}</td> 
+                                            </tr>
+                                            {% endfor %}
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div id="sect-proc" class="card card-{{ thmcolor }}">
                             <div class="card-header">
@@ -460,6 +510,10 @@
                                     </li>
                                 </ul>
                             </div>
+
+
+
+
                             <div class="card-body">
                                 <div class="tab-content" id="custom-tabs-two-tabContent">
                                     <div class="tab-pane fade show active" id="proc-usej" role="tabpanel" aria-labelledby="proc-usej">

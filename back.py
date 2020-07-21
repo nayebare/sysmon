@@ -1,5 +1,21 @@
 import os, psutil, time, getpass, pyudev
 
+
+#list computer disks
+def listDisks():
+    disks_data = []
+    context = pyudev.Context()
+    for device in context.list_devices(subsystem="block"):
+        if device.device_type == u"disk":
+            property_dict = dict(device.items())
+            disks_data.append(
+                {
+                    'model':    property_dict.get('ID_MODEL'),
+                    'serial':   property_dict.get('ID_SERIAL_SHORT')
+                })
+    return disks_data
+       
+
 def GetOSUnameData():
     unamdata = os.uname()
     retndata = {
@@ -119,6 +135,7 @@ def GetProcessInfo():
                                      "username"]):
         procinfo.append(indx.info)
     return procinfo
+
 
 def GetSingleProcess(prociden):
     try:

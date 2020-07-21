@@ -5,6 +5,12 @@ import back, click
 main = Flask(__name__)
 
 
+#get data about the connected device 
+@main.route("/devices/", methods=["GET"])
+def connected_devices():
+    disks_data = back.listDisks()
+    return (jsonify ({'data': disks_data}))
+
 @main.route("/termproc/<prociden>/", methods=["GET"])
 def termproc(prociden):
     back.TerminateSingleProcess(prociden)
@@ -85,7 +91,7 @@ def mainfunc(portdata, netprotc):
     elif netprotc == "ipprotv4":
         print(" * IP version  : 4")
         netpdata = "0.0.0.0"
-    main.run(port=portdata, host=netpdata)
+    main.run(port=portdata, host=netpdata, debug=True)
 
 if __name__ == "__main__":
     mainfunc()
