@@ -1,4 +1,4 @@
-import os, psutil, time, getpass
+import os, psutil, time, getpass, pyudev
 
 def GetOSUnameData():
     unamdata = os.uname()
