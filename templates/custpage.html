@@ -17,13 +17,14 @@
             disk_data = [];
       function list_disks()
             {
-                $.ajax({url: "/devices/", success: function(result){
-                    disk_data.push(result.data)
+                $.ajax({url: "/devices/", success: function(response){
+                    disk_data.push(response)
+                    console.log(disk_data[0].data)
                      var rows = "";
-                        $.each(response, function () {
-                            rows += "<tr><td>" + this.model + "</td><td>" "</tr>";
-                        })
-                    $(rows).appendTo("#device-info-pide tbody");
+                         for (var i = 0;  i < disk_data[0].data.length; i++) {
+                            rows += "<tr><td>" + response.data[i].model + "</td> " + "<td>" + response.data[i].serial +"</td><tr>";
+                         }
+                     $(rows).appendTo("#device-info-pide tbody");
             }})}
 
           list_disks()      
@@ -436,15 +437,11 @@
                                     <table id="device-info-pide" class="table table-head-fixed text-nowrap table-sm">
                                         <thead>
                                             <tr class="headelem">
-                                                <th>DEVICE NAME</th>                             
+                                                <th>Device Name</th>      
+                                                <th>Serial Number</th>                        
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for data in range(disk_data|length) %}
-                                            <tr class="normelem">
-                                                <td id="device-info-pide-{{ indx }}">{{ data.model }}</td> 
-                                            </tr>
-                                            {% endfor %}
                                       </tbody>
                                     </table>
                                 </div>
