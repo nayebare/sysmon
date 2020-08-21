@@ -4,8 +4,8 @@
 
 # Inc,.Fieldcloud France Grenoble
 
-1. source venv/bin/activate - activate virtual environment
-2. python3 main.py -p 6969 -6
-2. generate added modules:txt[pip freeze > requirements.txt]
-3. install the dependencies modules [pip install -r requirements.txt]
- 
+1. create a virtual environment virtualenv venv
+2.source venv/bin/activate - activate virtual environment
+3. python3 main.py -p 6969 -6
+4. generate added modules:txt[pip3 freeze > requirements.txt]
+5. install the dependencies modules [pip3 install -r requirements.txt]

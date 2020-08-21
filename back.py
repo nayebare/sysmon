@@ -14,7 +14,7 @@ def listDisks():
                     'serial':   property_dict.get('ID_SERIAL_SHORT')
                 })
     return disks_data
-       
+
 
 def GetOSUnameData():
     unamdata = os.uname()

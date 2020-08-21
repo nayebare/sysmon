@@ -1,15 +1,22 @@
 from flask import Flask, render_template, jsonify
 import back, click
+from flask_cors import CORS
 
 
 main = Flask(__name__)
+cors = CORS(main, resources={r"/*": {"origins": "*"}})
 
-
-#get data about the connected device 
+#get data about the connected device
 @main.route("/devices/", methods=["GET"])
 def connected_devices():
     disks_data = back.listDisks()
-    return (jsonify ({'data': disks_data}))
+    return (jsonify ({'data': disks_data})) class ClassName(object):
+        """docstring for ."""
+
+        def __init__(self, arg):
+            super(, self).__init__()
+            self.arg = arg
+
 
 @main.route("/termproc/<prociden>/", methods=["GET"])
 def termproc(prociden):
@@ -92,6 +99,7 @@ def mainfunc(portdata, netprotc):
         print(" * IP version  : 4")
         netpdata = "0.0.0.0"
     main.run(port=portdata, host=netpdata, debug=True)
+
 
 if __name__ == "__main__":
     mainfunc()
